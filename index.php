@@ -1,40 +1,25 @@
 <?php
 
-// Opérateurs de conditionnement
-// == 
-// <  >
-// <=    >=
-// !=
+// Les conditions multiples
+
+	// $pseudo = "Tintin";
+	// $mdp = "Lune";
 
 
 
+	// if ($pseudo == "Tintin" AND $mdp == "Lune") {
 
-// Conditions if
+	// 	echo "Mot de passe valide.";
 
-	$age = 18;
-
-
-	if ($age >= 18) {
-
-		echo "Vous êtes majeur.";
-
-	}
-
-
-	// if ($age == 18) {
-	// 	echo "Vous êtes enfin majeur.";
 	// }
 
+// Les conditions ternaires
 
-	if ($age <= 17) {
-		echo "Vous êtes mineur.";
-	}
+// Number % 10 == 0
 
+	$nombre = 20;
 
-
-
-
-
+	echo ($nombre % 10 == 0)? 'true' : 'false';
 
 
 
