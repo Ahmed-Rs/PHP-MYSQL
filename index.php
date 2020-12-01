@@ -1,39 +1,34 @@
 <?php
 
-	// Les tableaux
-
-	// $identitePersonneA = array(
-	// 	'id' 	 => 4,
-	// 	'prenom' => 'John',
-	// 	    => 'Dupont',
-	// 	'age' 	 => 24
-	//  );
-
-	// echo 'Bonjour '.$identitePersonneA["prenom"]." ".$identitePersonneA["nom"].' !';
-
-
-
-	// Génération automatique de clés
-
-	$identitePersonneA = array(15, 'Nicolas', 'Dupont', 20);
-
-	echo 'Bonjour '.$identitePersonneA[1]." ".$identitePersonneA[2].' !';
+// Opérateurs de conditionnement
+// == 
+// <  >
+// <=    >=
+// !=
 
 
 
 
+// Conditions if
+
+	$age = 18;
 
 
+	if ($age >= 18) {
+
+		echo "Vous êtes majeur.";
+
+	}
 
 
+	// if ($age == 18) {
+	// 	echo "Vous êtes enfin majeur.";
+	// }
 
 
-
-
-
-
-
-
+	if ($age <= 17) {
+		echo "Vous êtes mineur.";
+	}
 
 
 
