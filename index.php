@@ -1,19 +1,44 @@
 <?php
 
+// BOUCLES IMBRIQUEES
 
-// LES BOUCLES
 
-// DO WHILE
 
-	$x = 0;
 
-	do {
+echo '
+	<table border style="border-collapse: collapse"> 
+		<tr>
+			<th></th>
+			<th>1</th>
+			<th>2</th>
+			<th>3</th>
+			<th>4</th>
+			<th>5</th>
+			<th>6</th>
+			<th>7</th>
+			<th>8</th>
+			<th>9</th>
+			<th>10</th>
+		</tr>
 
-		echo "Le nombre est égal à : "."$x"."<br />";
-		$x++;
+';
+
+
+
+
+for ($i = 1; $i <= 10; $i++) {
+
+	echo '<tr><th>'.$i.'</th>';
+
+	for ($j = 1; $j <= 10; $j++) {
+
+
+		echo '<td>'.$i*$j.'</td>';
 
 	}
-	 while ($x < 0);
+
+	echo "</tr>";
+}
 
 
 
@@ -34,57 +59,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// // FOREACH
-
-// 	$nicolas = array(
-// 		'prenom' => 'Nicolas', 
-// 		'nom' => 'Dupont', 
-// 		'age' => 38 
-		
-// 	);
-
-
-// 	foreach ($nicolas as $item) {
-// 		echo $item."<br />";
-// 	}
-
-
-
-
-// WHILE
-
-	// $ligne = 0;
-
-	// while ($ligne < 10) {		// On utilise while quand on ne sait pas exactement combien de répétitions il va y avoir.
-		
-	// 	echo "Voici le numéro de ma ligne: ".($ligne + 1)."<br />";
-	// 	$ligne++;
-
-	// }
-
-
-
-
-// FOR
-
-	// for ($i = 0; $i < 10; $i++) { 		// On utilise if quand on sait combien de fois on veut de répétitions.
-
-	// 	echo "Voici le numéro de ma ligne: ".($i + 1)."<br />";
-
-	// }
 
 
 
