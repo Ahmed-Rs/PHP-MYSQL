@@ -1,69 +1,94 @@
 <?php
 
 
-// LES CONDITIONS SIMPLES
+// LES BOUCLES
 
-	$number = 10;
+// DO WHILE
 
-	if ($number == 10) 
-		echo "True";
-	  else 
-		echo "False";
-	
+	$x = 0;
 
+	do {
 
+		echo "Le nombre est égal à : "."$x"."<br />";
+		$x++;
 
-
-// SWITCH
-// Uniquement pour tester des égalités
+	}
+	 while ($x < 0);
 
 
-	// $note = 20;
 
-	// switch ($note) {
-	// 	case 1:
-	// 		echo "T'es nul.";
-	// 		break;
-	// 	case 1:
-	// 	echo "T'es nul.";
-	// 		break;
 
-	// 	default:
-	// 		echo "C'est bien !";
-	// 		break;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // FOREACH
+
+// 	$nicolas = array(
+// 		'prenom' => 'Nicolas', 
+// 		'nom' => 'Dupont', 
+// 		'age' => 38 
+		
+// 	);
+
+
+// 	foreach ($nicolas as $item) {
+// 		echo $item."<br />";
+// 	}
+
+
+
+
+// WHILE
+
+	// $ligne = 0;
+
+	// while ($ligne < 10) {		// On utilise while quand on ne sait pas exactement combien de répétitions il va y avoir.
+		
+	// 	echo "Voici le numéro de ma ligne: ".($ligne + 1)."<br />";
+	// 	$ligne++;
+
 	// }
 
 
 
 
+// FOR
 
+	// for ($i = 0; $i < 10; $i++) { 		// On utilise if quand on sait combien de fois on veut de répétitions.
 
-
-
-
-
-// IF ELSE IF else
-
-	// $age = "18";
-	
-	// if ($age < 18) {
-
-	// 	echo "Vos êtes mineur";
-
-	// } elseif($age == 18) {
-
-	// 	echo "Vous êtes enfin majeur!";
-		
-	// } elseif ($age > 18) {
-		
-	// 	echo "Vous êtes majeur.";
-
-	// } else {
-
-	// 	echo "Erreur";
+	// 	echo "Voici le numéro de ma ligne: ".($i + 1)."<br />";
 
 	// }
-	
+
+
+
+
 
 
 
