@@ -1,43 +1,30 @@
-<?php
+	<!DOCTYPE html>
+	<html>
 
-// FONCTIONS TABLEAUX
+		<head>
+			<meta charset='utf-8'>
+			<title>Test</title>
+		</head>
 
+		<body>
 
-$tableau = array("Stendhal", "Arnold", "Michel");
+			<?php require_once("src/header.php")  ?>
+			<?php require_once("src/header.php")  ?> <!-- On utilise requie() au lieu de include lorsqu'on veut que toute la page ne s'affiche plus lorsqu'on ne trouve pas un fichier donné. -->
+			<!-- Le _once indique que le fichier ne doit être ajoutée qu'une seule fois dans notre code. -->
 
-// INVERSER INDEX ET VALEUR
-// array_flip
+			<section style="border: 1px solid pink; padding: 30px;">
+				Hello
+			</section>
 
-// $tableau_2 = array_flip($tableau);
-// echo $tableau_2["Stendhal"];
-
-
-// array_key_exists
-
-if(array_key_exists(0, $tableau)) {
-
-echo "YES ! <br />";
-}
-
-
-// count
-
-echo count($tableau)."<br />";
-
-// sort
-
-sort($tableau); // Ranger dans l'ordre alphabétique
-
-foreach ($tableau as $name) {
-	echo $name."<br />";
-}
+			<footer style="border: 1px solid pink; padding: 30px;">
+				Le pied de page
+			</footer>
 
 
 
+		</body>
+	</html>
 
 
 
-
-
-?>
 
