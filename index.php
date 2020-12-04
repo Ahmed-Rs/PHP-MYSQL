@@ -1,48 +1,52 @@
 <?php
 
-// FONCTION
-
-// DEFINIR UNE FCT : LES RACINES D'UNE EQUATION
-// ax²+bx+c
+// FONCTION NATIVES
 
 
-$a;
-$b;
-$c;
+// FONCTION NATIVES MATHS
+
+// ABS
+echo abs(-76)."<br />";
+
+// MAX
+echo max(56, -78, 99)."<br />";
+
+// MIN
+echo min(56, -78, 99)."<br />";
+
+// RAND
+echo rand(0, 25)."<br />";
+
+// ROUND
+echo round(55.968, 2)."<br />";
 
 
-function delta($a, $b, $c) {
-	$resultat = pow($b, 2) - (4 * $a * $c);
-	return "$resultat";
-	
-}
 
 
-function racine($a, $b, $c) {
-	$del = delta($a, $b, $c);
-	if ($a == 0) {
-		echo "La division par 0 n'est pas autorisée.";
-		exit;
-	}
-
-	if ($del < 0) {
-		echo "Pas de solutions réelles pour cette équation";	
-
-	} elseif ($del == 0) {
-		$s0 = (-(($b) / (2 * $a)));
-		echo "La solution de cette équation est S = ".$s0.".";
-
-	} elseif ($del > 0) {		
-		$s1 = (-($b - sqrt($del)) / (2 * $a));
-		$s2 = (-($b + sqrt($del)) / (2 * $a));
-		echo "Les solutions de cette équation sont S1 = : ".$s1." et S2 = ".$s2.".";
-	}
 
 
-}
 
-racine(5, -1, 7);
+// FONCTION NATIVES STRING
 
+$string = "Bienvenue à La Formation.";
+echo "$string <br />";
+
+// STRLEN
+echo "Le nombre de caractères : ".strlen($string).". <br />";
+
+// STR_REPLACE
+echo "La string transformée : ".str_replace("Bienvenue", "Venez", $string)."<br />";
+
+
+// STR_TOLOWER
+echo strtolower($string)."<br />";
+
+// STR_TOUPPER
+echo strtoupper($string)."<br />";
+
+
+// SUBSTR
+echo substr($string, 0, 9)."<br />";
 
 
 
