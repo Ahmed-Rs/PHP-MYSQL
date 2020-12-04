@@ -1,29 +1,72 @@
-	<!DOCTYPE html>
-	<html>
+<?php
 
-		<head>
-			<meta charset='utf-8'>
-			<title>Test</title>
-		</head>
+// FORMULAIRES
+	
 
-		<body>
+	// On demande avec isset() si on recoit des données de type prenom et nom
 
-			<?php require_once("src/header.php")  ?>
-			<?php require_once("src/header.php")  ?> <!-- On utilise requie() au lieu de include lorsqu'on veut que toute la page ne s'affiche plus lorsqu'on ne trouve pas un fichier donné. -->
-			<!-- Le _once indique que le fichier ne doit être ajoutée qu'une seule fois dans notre code. -->
+	if (isset($_POST['prenom']) && isset($_POST['nom'])) {
 
-			<section style="border: 1px solid pink; padding: 30px;">
-				Hello
-			</section>
+		$prenom = htmlspecialchars($_POST['prenom']);
+		$nom 	= htmlspecialchars($_POST['nom']);
 
-			<footer style="border: 1px solid pink; padding: 30px;">
-				Le pied de page
-			</footer>
+		echo 'Bonjour '.$prenom.' '.$nom.' !';
+		
+	}
+
+	echo "<form method='post' action='index.php'>
+		
+			<p>
+				<table>
+					<tr>
+						<td>Prénom</td>
+						<td><input type='text' name='prenom' /></td>
+					</tr>
+					<tr>
+						<td>Nom</td>
+						<td><input type='text' name='nom' /></td>
+					</tr>
+				</table>
+				<button type='submit'>Envoyer</button>
+			</p>
+
+		</form>";
 
 
 
-		</body>
-	</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
