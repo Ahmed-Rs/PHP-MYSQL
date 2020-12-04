@@ -1,52 +1,39 @@
 <?php
 
-// FONCTION NATIVES
+// FONCTIONS TABLEAUX
 
 
-// FONCTION NATIVES MATHS
+$tableau = array("Stendhal", "Arnold", "Michel");
 
-// ABS
-echo abs(-76)."<br />";
+// INVERSER INDEX ET VALEUR
+// array_flip
 
-// MAX
-echo max(56, -78, 99)."<br />";
-
-// MIN
-echo min(56, -78, 99)."<br />";
-
-// RAND
-echo rand(0, 25)."<br />";
-
-// ROUND
-echo round(55.968, 2)."<br />";
+// $tableau_2 = array_flip($tableau);
+// echo $tableau_2["Stendhal"];
 
 
+// array_key_exists
+
+if(array_key_exists(0, $tableau)) {
+
+echo "YES ! <br />";
+}
+
+
+// count
+
+echo count($tableau)."<br />";
+
+// sort
+
+sort($tableau); // Ranger dans l'ordre alphabétique
+
+foreach ($tableau as $name) {
+	echo $name."<br />";
+}
 
 
 
-
-
-// FONCTION NATIVES STRING
-
-$string = "Bienvenue à La Formation.";
-echo "$string <br />";
-
-// STRLEN
-echo "Le nombre de caractères : ".strlen($string).". <br />";
-
-// STR_REPLACE
-echo "La string transformée : ".str_replace("Bienvenue", "Venez", $string)."<br />";
-
-
-// STR_TOLOWER
-echo strtolower($string)."<br />";
-
-// STR_TOUPPER
-echo strtoupper($string)."<br />";
-
-
-// SUBSTR
-echo substr($string, 0, 9)."<br />";
 
 
 
