@@ -1,69 +1,50 @@
 <?php
 
-// PROJET # 1
+// FONCTION
+
+// DEFINIR UNE FCT : LES RACINES D'UNE EQUATION
+// ax²+bx+c
 
 
+$a;
+$b;
+$c;
 
 
-echo '<table border>
-
-	<tr>
-	<th>Nombre</th>
-	<th>Carré</th>
-	<th>Racine</th>
-	</tr>
-
-';
-
-
-for ($i = 1; $i <= 10; $i++) { 
-
-	echo '<tr>
-		<td>'.$i.'</td>
-		<td>'.pow($i, 2).'</td>
-		<td>'.sqrt($i).'</td>
-	</tr>';
+function delta($a, $b, $c) {
+	$resultat = pow($b, 2) - (4 * $a * $c);
+	return "$resultat";
 	
 }
 
 
-echo '</table>';
+function racine($a, $b, $c) {
+	$del = delta($a, $b, $c);
+	if ($a == 0) {
+		echo "La division par 0 n'est pas autorisée.";
+		exit;
+	}
+
+	if ($del < 0) {
+		echo "Pas de solutions réelles pour cette équation";	
+
+	} elseif ($del == 0) {
+		$s0 = (-(($b) / (2 * $a)));
+		echo "La solution de cette équation est S = ".$s0.".";
+
+	} elseif ($del > 0) {		
+		$s1 = (-($b - sqrt($del)) / (2 * $a));
+		$s2 = (-($b + sqrt($del)) / (2 * $a));
+		echo "Les solutions de cette équation sont S1 = : ".$s1." et S2 = ".$s2.".";
+	}
 
 
-// echo '
-// 	<table border style="border-collapse: collapse"> 
-// 		<tr>
-// 			<th></th>
-// 			<th>1</th>
-// 			<th>2</th>
-// 			<th>3</th>
-// 			<th>4</th>
-// 			<th>5</th>
-// 			<th>6</th>
-// 			<th>7</th>
-// 			<th>8</th>
-// 			<th>9</th>
-// 			<th>10</th>
-// 		</tr>
+}
 
-// ';
+racine(5, -1, 7);
 
 
 
-
-// for ($i = 1; $i <= 10; $i++) {
-
-// 	echo '<tr><th>'.$i.'</th>';
-
-// 	for ($j = 1; $j <= 10; $j++) {
-
-
-// 		echo '<td>'.$i*$j.'</td>';
-
-// 	}
-
-// 	echo "</tr>";
-// }
 
 
 
