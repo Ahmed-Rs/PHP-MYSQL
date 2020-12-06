@@ -1,72 +1,110 @@
-<?php
+<?php 
 
-	// ENVOI FICHIER PHP
-
-	// inupt de type file car on veut envoyer un fichier.
-
-	// $_FILES['image'] // On utilise $_FILES pour dire à notre server qu'il doit réceptionner un fichier. 'image'fait référence à notre fichier image ci-dessous. 
-
-	// $_FILES['image']['name'] // Avec l'option 'name' on isole le nom du fichier. On peut même le stocker dans une variable.
-
-	// $_FILES['image']['type'] // Avec l'option 'type', on a par exemple le type png, pdf ...
-
-	// $_FILES['image']['size'] // Taille
-
-	// $_FILES['image']['tmp_name'] // Cette option renvoie le nom de l'emplacement temporaire où se situe le fichier dans le serveur.
-
-	// $_FILES['image']['error'] // Si oui ou non notre image a bien été reçue par notre serveur. Si oui, on peut utiliser des traitements sur notre image.
-
-
-if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {	// Si le fichier existe et qu'il n'y a pas d'erreur(image reçue par notre serveur)
-	
-	if ($_FILES['image']['size'] <= 3000000) {	// On vérifie la taille
+	if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
 		
-		$informationsImage = pathinfo($_FILES['image']['name']); // Capter toutes les infos du fichier dans un tableau
+		// Cette variable sera réécrite ci-dessous si l'opération est un succès
+		$error = 1;
 
-		$extensionImage = $informationsImage['extension']; // On récupère l'extension du fichier
-
-		$extensionsArray = array('png', 'gif', 'jpg', 'jpeg'); // On compare cette extension avec des extensions qu'on aura préalablement autorisées dans un tableau créé à cet effet
-
-		if (in_array($extensionImage, $extensionsArray)) {
-			// On peut enfin envoyer l'image définitivement sur notre serveur
-
-			// On envoie le fichier de l'emplacement provisoire vers l'emplacement définitif, en lui générant un nouveau nom unique.
-			// move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/'.time().basename($_FILES['image']['name']));
-			// echo 'Envoi réussi !';
+		if ($_FILES['image']['size'] <= 3000000) {
 			
-			// Le mieux c'est de concaténer avec une fct. rand()
-			move_uploaded_file($_FILES['image']['tmp_name'], 'uploads/'.time().rand().rand().'.'.$extensionImage);
-			echo 'Envoi réussi !';
+			$informationsImage 	  = pathinfo($_FILES['image']['name']);
+
+			$extensionImage   	  = $informationsImage['extension'];
+
+			$extensionsAutorisees = array('png', 'gif', 'jpg', 'jpeg');
+
+			if (in_array($extensionImage, $extensionsAutorisees)) {
+
+				$adress = 'uploads/'.time().rand().'.'.$extensionImage;
+				
+				move_uploaded_file($_FILES['image']['tmp_name'], $adress);
+
+				$error = 0;
+
+
+			}
 
 		}
 
 	}
 
-}
-
-
-
-
-
-echo '<form method="post" action="index.php" enctype="multipart/form-data"> 
-		<p>
-			<h1>Formulaire</h1>
-			<input type="file" name="image" /><br />
-			<button type="submit">Envoyer</button>
-		</p>
-	</form>';
+?>
 
 
 
 
 
 
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+		<title>Hébergeur d'images gratuit</title>
 
 
+	</head>
+
+	<style type="text/css">
+		html, body { margin: 0; font-family: georgia; }
+		header { text-align: center; color: white; background-color: red }
+		article { margin-top: 50px; background-color: #f7f7f7; padding: 10px; }
+		button { margin-top: 10px; }
+		h1 { margin-top: 0; text-align: center; }
+		#presentation-picture { text-align: center; }
+		#image { max-width: 300px; }
+		.container { width: 500px; margin: auto;}
+		
+	</style>
+
+	<body>
+
+		<header>
+			<h2>PHOTOSHOOT</h2>
+		</header>
 
 
+		<div class="container">
+			<article>
+
+				<h1>Hébergez une image</h1>
+
+				<?php
+
+					if (isset($error) && $error == 0) {
+						echo '<div id="presentation-picture"><img src="'.$adress.'" id="image"><br />
+
+						<a href="http://localhost/'.$adress.'" target="_blank">Votre image</a></div>';
+					} elseif (isset($error) && $error == 1) {
+						
+						echo 'Votre image ne peut pas être envoyée. Vérifiez son extension et sa taille (max: 3Mo).';
+
+					}
+
+				?>
 
 
+				<form method="post" action="/index.php" enctype="multipart/form-data">
+					<p>
+						<h1>Formulaire</h1>
+						<input type="file" required name="image"><br />
+						<div style="text-align: center;">
+							<button type="submit">Héberger</button>
+						</div>
+					</p>
+				</form>
+
+
+				
+
+			</article>
+		</div>
+
+
+	</body>
+</html>
 
 
 
