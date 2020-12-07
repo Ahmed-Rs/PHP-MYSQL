@@ -25,13 +25,28 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 	}
 
 
-	// LIRE DES INFORMATIONS
+// AJOUTER UN UTILISATEUR 
+	$requete = $bdd->exec('INSERT INTO users(prenom, nom, serie_preferee) 
+							VALUES("Jeff", "Bezos", "Stargate SG-1")')
+					or die(print_r($bdd->errorInfo())); // Avec exec(), on insère des données en brut, l'inconvénient c'est qu'à chaque actualisation on l'insère une fois de plus.
+					// On affiche les erreurs en détail avec or(print-r($bdd->errorInfo()));
+
+
+// MODIFIER UN UTILISATEUR
+
+	// $requete = $bdd->exec('UPDATE users SET serie_preferee="Stargate SG-1" WHERE prenom = "Jeff"'); // Toujours utiliser WHER afin de ne pas affecter les autres lignes que celle que l'on veut modifer.
+
+
+// SUPPRIMER UN UTILISATEUR
+	// $requete = $bdd->exec('DELETE FROM users WHERE prenom="Jeff"');
+
+
+
+
+// LIRE DES INFORMATIONS
 	$requete = $bdd->query('SELECT * 
-							FROM users
-							-- WHERE prenom = "Tolstoi" &&
-								  -- nom = "Leon"
-							ORDER BY id DESC
-							LIMIT 0, 1'); // Sélectionne toute la table users, avec la clause WHERE, on n'attrape que la ligne dont le prenom est Tolstoi et nom Leon, avec ORDER id DESC, on inverse l'ordre d'affichage. Avec LIMIT, le 1er chfr donne le début et le 2e chfr donne le nombre de ligne à afficher à partir de ce début. Il faut impérativement respecter l'order d'écriture des clauses. Si on ne voulait sélectionner que les prénoms de cette table on pourrait rajouter prenom a côté de SELECT à la place de l'étoile.
+							FROM users');
+							
 
 	echo '<table border>
 
@@ -55,23 +70,10 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 	}
 
 
+	$requete-> closeCursor();	// On ferme notre requête, notre connection à notre base de données.
+
 	echo '</table>';
 ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -95,35 +97,6 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 	</body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
