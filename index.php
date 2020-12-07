@@ -38,7 +38,7 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 
 // MODIFIER UN UTILISATEUR
 
-	// $requete = $bdd->exec('UPDATE users SET serie_preferee="Stargate SG-1" WHERE prenom = "Jeff"'); // Toujours utiliser WHER afin de ne pas affecter les autres lignes que celle que l'on veut modifer.
+	// $requete = $bdd->exec('UPDATE users SET serie_preferee="Stargate SG-1" WHERE prenom = "Jeff"'); // Toujours utiliser WHERE afin de ne pas affecter les autres lignes que celle que l'on veut modifer.
 
 
 // SUPPRIMER UN UTILISATEUR
@@ -172,11 +172,24 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 	// Lorsque deux tableaux partagent un même nom de colonne, on renomme dynamiquement l'une des colonnes d'un des deux tableaux
 	// On appelle les noms de colonnes en les précédant du nom de la table, qui, peut lui-même être raccourci avec un AS. On peut supprimer tous les AS, le code comprendra qu'il faut les mettre.
 
-	$requete = $bdd->query('SELECT prenom, nom, u.serie_preferee AS serie_preferee, j.serie_preferee AS metier
-							FROM users AS u							
-							INNER JOIN job AS j 
-							ON u.id = j.id_user'); // En remplaçant INNER par LEFT ou RIGHT, même s'il n'y a pas de correspondance entre l'id de users et l'id_user de job, on aura affiché respectivement le tableau de gauche(sans le droit) ou de droite (sans le gauche), concernant uniquement les lignes où il n'y a pas de correspondance.
 
+
+	// $prenom = '" OR 1=1#';
+	$prenom = 'Alain';
+	$nom = 'Stendhal';
+	// $prenom = htmlspecialchars($prenom); Cette solution anti-injections peut être utilisée 
+
+	// Autrement, on utilise prepare() à la place de query pour faire une requête. Cela permet de préparer une requête avant de l'exécuter.
+
+	$requete = $bdd->prepare('SELECT prenom, nom, u.serie_preferee AS serie_preferee, j.serie_preferee AS metier
+							FROM users AS u							
+							LEFT JOIN job AS j 
+							ON u.id = j.id_user
+							WHERE prenom = ? && nom = ?'); // On met un point d'interrogation pour signifier qu'une valeur va arriver, et on la stock dans un array.
+
+	// EXECUTION DE LA REQUETE
+
+	$requete->execute(array($prenom, $nom));
 
 
 	 echo '<br /><table border>
@@ -202,14 +215,6 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 		</tr>';
 
 	}
-
-
-
-
-
-
-
-
 
 
 
