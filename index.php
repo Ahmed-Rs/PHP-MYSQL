@@ -9,102 +9,66 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 
 <?php
 
-	// JOINTURES INTERNES 
-	// WHERE : moins en moins utilisée, moins claire
-	// JOIN : plus en plus utilisée, plus claire
-
-	// Création de la connection à notre base de données
-	// HOTE : localhost (serveur)
-	// NOM DE LA BASE : formation_users
-	// LOGIN : root
-	// MDP : root
+// RECEVOIR DES DONNEES VIA UN FORMULAIRE
 
 	// CONNECTION
 	try {
-		$bdd = new PDO('mysql:host=localhost;port=3308;dbname=formation_users;charset=utf8', 'root', '');
+		$bdd = new PDO('mysql:host=localhost;dbname=formation_users;charset=utf8;port=3308', 'root', '');
 	} catch(Exception $e) {
 		die('Erreur : '.$e->getMessage());
 	}
 
 
-// AJOUTER UN UTILISATEUR 
-	// $requete = $bdd->exec('INSERT INTO users(prenom, nom, serie_preferee) 
-	// 						VALUES("Jeff", "Bezos", "Stargate SG-1")')
-	// 				or die(print_r($bdd->errorInfo())); // Avec exec(), on insère des données en brut, l'inconvénient c'est qu'à chaque actualisation on l'insère une fois de plus.
-	// 				// On affiche les erreurs en détail avec or(print-r($bdd->errorInfo()));
+	// AJOUTE UN NOUVEL UTILISATEUR
+
+	if (isset($_POST['prenom']) && isset($_POST['nom']) && isset($_POST['serie'])) {		
+		$prenom = $_POST['prenom'];
+		$nom    = $_POST['nom'];
+		$serie  = $_POST['serie'];
 
 
-// MODIFIER UN UTILISATEUR
+		$requete = $bdd->prepare('INSERT INTO users(prenom, nom, serie_preferee)
+		VALUES(?, ?, ?)')
+		or die(print_r($bdd->errorInfo()));
+	
+		$requete->execute(array($prenom, $nom, $serie));
+								
+	}
+	
 
-	// $requete = $bdd->exec('UPDATE users SET serie_preferee="Stargate SG-1" WHERE prenom = "Jeff"'); // Toujours utiliser WHERE afin de ne pas affecter les autres lignes que celle que l'on veut modifer.
-
-
-// SUPPRIMER UN UTILISATEUR
-	// $requete = $bdd->exec('DELETE FROM users WHERE prenom="Jeff"')
-
-
-
-// AJOUT UTILISATEUR
-
-	// $requete2 = $bdd2->exec('INSERT INTO job(id_user, metier) VALUES(1, "Développeur")') or die(print_r($bdd2->errorInfo()));
-
-
-
-
-// CLAUSE JOIN AVEC RENOMMER COLONNE
-
-// ENCRYPTAGE DE DONNEES, USAGE DU SHA1 PLUS GRAIN DE SEL
-
-
-	// $prenom = '" OR 1=1#';
-	$prenom = 'Alain';
-	$nom = 'Stendhal';
-
-	// Autrement, on utilise prepare() à la place de query pour faire une requête. Cela permet de préparer une requête avant de l'exécuter.
-
-	$requete = $bdd->prepare('SELECT prenom, nom, u.serie_preferee AS serie_preferee, j.serie_preferee AS metier
-							FROM users AS u							
-							LEFT JOIN job AS j 
-							ON u.id = j.id_user');
+	// AFFICHE LES INFORMATIONS
+	$requete = $bdd->query('SELECT prenom, nom, serie_preferee
+							  FROM users');
 
 	// EXECUTION DE LA REQUETE
 
-	$requete->execute(array($prenom, $nom));
 
-
-	 echo '<br /><table border>
-
-	 		<tr><th>Pseudo</th>
+	 echo '<table border>	 
+	 		<tr>
+	 			<th>Pseudo</th>
 	 			<th>Nom</th>
 	 			<th>Série Préférée</th>
-	 			<th>Mot de passe</th>
-
 	 		</tr>';
 
 	while ($donnees = $requete->fetch()) {
 		echo '<tr>
-
-			  <td>'.$donnees['prenom'].'</td>';
-
-		echo '<td>'.$donnees['nom'].'</td>';
-
-		echo '<td>'.$donnees['serie_preferee'].'</td>';
-
-		echo '<td>'.sha1($donnees['metier'].'5465jk').'</td> 
-
-		</tr>';
+		        <td>'.$donnees['prenom'].'</td>
+				<td>'.$donnees['nom'].'</td>
+				<td>'.$donnees['serie_preferee'].'</td>
+			  </tr>';
 
 	}
 
 
-	// $requete-> closeCursor();
+	echo '</table>';
 
-
-
-
+	$requete-> closeCursor();
 
 
 ?>
+
+
+
 
 <!DOCTYPE html>
 
@@ -116,14 +80,31 @@ PDO => très sécurisé et très utilisé, mySQL, Oracle, PostgreSQL -->
 	</head>
 
 	<body>
+		<h1>Ajouter un utilisateur</h1>
+
+		<form method="post" action="index.php">
+			<table>
+				<tr>
+					<td>Prénom</td>
+					<td><input type="text" name="prenom"></td>
+				</tr>
+				<tr>
+					<td>Nom</td>
+					<td><input type="text" name="nom"></td>
+				</tr>
+				<tr>
+					<td>Série préférée</td>
+					<td><input type="text" name="serie"></td>
+				</tr>
+			</table>
+
+			<button type="submit">Ajouter</button>
 
 
-
+		</form>
 
 	</body>
 
 </html>
-
-
 
 
